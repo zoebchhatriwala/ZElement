@@ -55,7 +55,6 @@
                 case "type":
                     break;
                 case "events":
-
                     // Error
                     if (typeof structValue != "object") {
                         throw "Events should be an array of objects";
@@ -67,10 +66,8 @@
                         element.addEventListener(eventInfo.type, eventInfo.handler);
                     });
                     // End
-
                     break;
                 case "children":
-
                     // Error
                     if (typeof structValue != "object") {
                         throw "Children should be an array of objects";
@@ -82,7 +79,6 @@
                         element.appendChild(this.convertObjectToHTMLElement(child));
                     });
                     // End
-
                     break;
                 case "innerHTML":
                     // Set text
@@ -135,19 +131,3 @@
     // expose the library
     window.zElement = zElement;
 })();
-
-var newButton = {
-    "type": "button",
-    "data-index": "1",
-    "class": "button-small",
-    "events": [{
-        type: "click",
-        handler: () => {
-            console.log(event);
-        }
-    }],
-    "children": [{
-        type: "span",
-        innerHTML: "Click me!"
-    }],
-};
