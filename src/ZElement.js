@@ -10,21 +10,32 @@
         // store an argument for this example
         this.elementStructure = arg;
 
+        // InnerHTML & Children conflict exception
+        if (!!arg.innerHTML && !!arg.children) {
+            throw "Conflict with innerHTML and children, cannot set property together"
+        }
+
         // Mutation element
         this.mutate = function (element, arg) {
             // Clear out children
-            if (!!arg.children) {
+            if (!!arg.children || !!arg.innerHTML) {
                 element.innerHTML = "";
+            } else if (!!this.elementStructure.children) {
+                // Keep the children
+                arg["children"] = this.elementStructure.children;
             }
 
             // Unbind events
-            const events = (!!arg.events) ? this.elementStructure.events : undefined;
-            if (typeof events == "object") {
+            const events = this.elementStructure.events;
+            if (!!events && !!arg.events) {
                 // Loop events
                 Object.entries(events).forEach(([index, eventInfo]) => {
                     // Remove events
                     element.removeEventListener(eventInfo.type, eventInfo.handler);
                 });
+            } else if (!!events) {
+                // Update events in args
+                arg["events"] = events;
             }
             // End
 
@@ -78,7 +89,8 @@
                     // Children logic
                     Object.entries(structValue).forEach(([index, child]) => {
                         // Append child
-                        element.appendChild(this.convertObjectToHTMLElement(child));
+                        const childElement = zElement(child).create();
+                        element.appendChild(childElement);
                     });
                     // End
                     break;
@@ -102,6 +114,7 @@
         // End loop
 
         // Set definition
+        element.zStructure = this.elementStructure;
         element.zMutate = this.mutate.bind(this, element);
 
         // Return the element
@@ -115,7 +128,7 @@
     };
 
     // Version
-    zElement.fn.version = "1.0.1";
+    zElement.fn.version = "1.0.2";
 
     // Dummy object
     zElement.fn.demo = function () {
