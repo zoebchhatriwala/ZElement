@@ -1,4 +1,4 @@
-# ZAction
+# ZElement
 ## About The Project
 A lightweight library to create / modify HTML Elements through a javascript object.
 
