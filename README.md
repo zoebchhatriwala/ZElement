@@ -24,7 +24,7 @@ var newButton = {
 };
 
 // Dummy defined object
-var newButtonDemoObj = zElement.demo();
+var newButtonDemoObj = zElement().demo();
 ```
 2. Creating the element
 ```JS
