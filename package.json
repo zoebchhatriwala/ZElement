@@ -1,0 +1,17 @@
+{
+    "name": "ZElement",
+    "description": "A lightweight library to create / modify HTML Elements from an javascript object",
+    "author": "Zoeb Chhatriwala <zoeb@chhatriwala.com>",
+    "version": "1.0.2",
+    "scripts": {
+        "build": "babel src -d dist --out-file-extension .min.js"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.0.0",
+        "@babel/core": "^7.0.0",
+        "@babel/polyfill": "^7.11.5",
+        "@babel/preset-env": "^7.11.5",
+        "babel-plugin-add-header-comment": "^1.0.3",
+        "babel-preset-minify": "^0.5.1"
+    }
+}
