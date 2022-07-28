@@ -34,7 +34,7 @@ const element = zElement(newButton).create();
 // Append the element
 document.body.appendChild(element);
 ```
-3. Mutate the element
+3. Mutating the element
 ```JS
 // Element created by the library has a function attached
 // Called zMutate
