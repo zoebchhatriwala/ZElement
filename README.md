@@ -1,6 +1,6 @@
 # ZAction
 ## About The Project
-A lightweight library to manage JavaScript events and handlers.
+A lightweight library to create / modify HTML Elements through a javascript object.
 
 ### Usage
 
