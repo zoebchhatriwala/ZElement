@@ -13,10 +13,12 @@
         // Mutation element
         this.mutate = function (element, arg) {
             // Clear out children
-            element.innerHTML = "";
+            if (!!arg.children) {
+                element.innerHTML = "";
+            }
 
             // Unbind events
-            const events = this.elementStructure.events;
+            const events = (!!arg.events) ? this.elementStructure.events : undefined;
             if (typeof events == "object") {
                 // Loop events
                 Object.entries(events).forEach(([index, eventInfo]) => {
@@ -85,8 +87,14 @@
                     element.innerHTML = structValue;
                     break;
                 default:
-                    // Set attribute
-                    element.setAttribute(structKey, structValue);
+                    // If structValue is defined? --> Not(false, null, undefined)
+                    if (!!structValue) {
+                        // Set attribute
+                        element.setAttribute(structKey, structValue);
+                    } else {
+                        // Remove the attribute
+                        element.removeAttribute(structKey);
+                    }
                     break;
             }
             // End
@@ -107,7 +115,7 @@
     };
 
     // Version
-    zElement.fn.version = "1.0.0";
+    zElement.fn.version = "1.0.1";
 
     // Dummy object
     zElement.fn.demo = function () {
